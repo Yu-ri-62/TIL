@@ -21,15 +21,35 @@ pip install django==3.0.8
 
 
 
+* MTV (MVC 패턴)
+
+  Model : 장고에서는 Model
+
+  View : 장고에서는 Template
+
+  Controller : 장고에서는 View
+
+  
+
+* 3대장 : 우리가 가장 밀접하게 수정하여야 하는 파일 명
+
+  1) urls.py
+
+  2) views.py
+
+  3) templates (html 들)
+
+
+
 * 장고 시작하기
 
   ```
-  django-admin startproject 프로젝트이름
+  django-admin startproject `프로젝트 이름`   # 프로젝트 생성
   ```
 
-  * `first_webex`라는 이름으로 폴더가 생성
+  * `프로젝트 이름`라는  폴더가 생성
 
-    * 여기 안에는 `first_webex` 폴더와 `manage.py` 생성 되어짐
+    * 여기 안에는 `프로젝트 이름` 폴더와 `manage.py` 생성 되어짐
 
       * first_webex : 프로젝트 설정 파일들이 들어 있음
 
@@ -39,13 +59,18 @@ pip install django==3.0.8
 
     * 가장 바깥에 있는 프로젝트 폴더명은 수정 가능하나, setting 파일이 들어있는 폴더명은 건들이지 말자.
 
+    * `cd 프로젝트 이름` 명령어를 통해 `프로젝트 이름` 폴더 안으로 들어가서 장고 실행!!
+
   * 장고 실행하기__(명령어를 실행하는 경로에 manage.py가 있는지 반드시 확인)__
 
     ```
     python manage.py runserver
     ```
+    
+    * 서버가 잘 만들어 졌는지 확인하기
 
-  
+
+
 
 * 장고 프로젝트는 Application의 집합체로 동작
 
@@ -56,9 +81,10 @@ pip install django==3.0.8
       * 어플리케이션을 이렇게 나뉘어야 한다 같은 기준은 없음.
       * 작은 프로젝트라면 어플리케이션을 따로 나누지 않아도 된다.
 
-  
 
-* 어플리케이션 생성
+
+
+* 어플리케이션 생성 (프로젝트 안에 여러 어플리케이션이 존재하며 어플리케이션은 각각의 역할을 한다)
 
   ```
   python manage.py startapp 앱이름(복수형)
@@ -67,11 +93,14 @@ pip install django==3.0.8
   * 해당 앱 이름으로 폴더가 생성됨 (앱폴더)
   * 바로 할 일이 있다!!! 
     * `setting.py`에 내가 생성한 app을 등록해야함
-    * Installed_app에 가장 윗줄에 등록해 준다.
-    * language_code = 'ko-kr' 왠만하면 소문자로
-    * time_zone = 'Asia/Seoul' 앞에만 대문자!!!!
+    * `INSTALLED_APPS`에 가장 윗줄에 등록해 준다.
+    * `LANGUAGE_CODE` = 'ko-kr' 왠만하면 소문자로
+    * `TIME_ZONE` = 'Asia/Seoul' 앞에만 대문자!!!!
 
-  
+  __*필수! 앱을 생성한 다음에 등록을 해야한다*__
+
+
+
 
 * 환경설정
 
@@ -96,45 +125,26 @@ pip install django==3.0.8
     TIME_ZONE = 'Asia/Seoul'
     ```
 
-    
 
-* MTV (MVC 패턴)
 
-  Model : 장고에서는 Model
 
-  View : 장고에서는 Template
-
-  Controller : 장고에서는 View
-
-  
-
-* 3대장 : 우리가 가장 밀접하게 수정하여야 하는 파일 명
-
-  1) urls.py
-
-  2) views.py
-
-  3) templates (html 들)
-
-  
-
-* **path('ur;패턴/', 실행이 되어야 하는 views에 있는 함수.해당 path의 별명)**
-
+* **path('url패턴/', 실행이 되어야 하는 views에 있는 함수.해당 path의 별명)**
+  * `urls.py`에서 입력하는데, 생성된 app에서 views.py에 있는 함수를 import함
+    * `form 앱이름 import views`
+    * path('url패턴/', views.호출할함수이름)
   * 많이 놓치는 부분 : url패턴 뒤에 슬래쉬
-
-* views.py 에서 해야할 일
-
-  * 함수를 정의 (첫번째 인자로 **request 필수**!!)
+* `views.py` 에서 해야할 일
+* 함수를 정의 __(첫번째 인자로 **request 필수**!! => view함수는 url로 들어온 요청을 받아야 하기 때문에)__
   * **return은 꼭 필요!**
     * render : 주로 과 함께 respose 할 때 사용하는 함수
+    * `return render(request, '~~~.html')`
+* `templates` 에서 해야할 일
+* 앱 안에 폴더를 만드는데, 폴더 명은 반드시 `templates` 로 만든다.
+  * `templates` 폴더안에 `html파일` 을 생성. __(사용자가 url로 들어왔을 때 보여질 페이지)__
 
-* template 에서 해야할 일
-
-  * 폴더 명은 반드시 `templates` 인 것을 확인
 
 
-
-## 여기 까지가 기본 수정할 파일들 조작 방법
+## 여기 까지 기본 수정할 파일들 조작 방법
 
 
 
