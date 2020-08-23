@@ -54,7 +54,8 @@
       * colspan:  열 단위로 합침.
       * rowspan: 행 단위로 합침.
     * form: 서버에 처리 될 데이터를 제공하는 역할
-      * action, method 속성
+      * action: 어디로 보낼지
+      *  method: GET, POST
     * input: 다양한 타입을 가지는 입력 데이터 필드
       * name, placeholder, required, autofocus
       * type: text, radio, checkbox, date, passward, ...
@@ -88,7 +89,50 @@
 * 선택자: 특정한 요소를 선택하여서 스타일링을 하기 위해 반드시 필요함.
 
   * 기초 선택자
-    * 타입(요소, 태그)선택자, 아이디 선택자, 클래스 선택자, 전체 선택자
+
+    * 타입(요소, 태그)선택자
+
+      ```
+      h2{ 
+        color: orange; 
+      }
+      ```
+
+    * 아이디 선택자: 문서에서 한번만 사용할 수 있고 한 태그에 단일 아이디 값만 사용할 수 있다.
+
+      ```
+      #purple {
+        color: purple;
+      }
+      
+      <li id="purple"></li>    적용할 태그
+      ```
+
+      
+
+    * 클래스 선택자: 해당 클래스가 적용될 모든 문서를 선택하여 바꿀 수 있다
+
+      ``` 
+      .green{ 
+        color:green; 
+      } 
+      .blue{
+        clolr:blue;
+      }
+      
+      <h1 class="green"></h1>    적용할 태그 
+      <h1 class="green blue"></h1>  여러개의 클래스를 받고 싶을 때, green blue를 적은 순서대로 적용되는 것이 아니라 마지막으로 선언된 것이 적용되기 때문에 blue가 적용된다.
+      ```
+
+    * 전체 선택자: * { color: red; }
+
+      ```
+       * { 
+        color: red; 
+        }
+      ```
+
+      
   * 고급 선택자
     * 자손 선택자: 하위의 모든 요소를 선택함 (띄어쓰기로 구분)
       선택자1 선택자2 { 속성: 속성값; } `article p { color: red; }`
@@ -98,7 +142,7 @@
       선택자1 ~ 선택자2 { 속성: 속성값; } `p ~ section { color: yellow; }`
     * 인접 형제 요소 선택자: 바로 붙어 있는 형제 요소를 선택함(+로 구분)
       선택자1 + 선택자2 { 속성: 속성값; } `div + p { color: purple; }`
-  
+
 * CSS 적용 우선순위
 
   1. 중요도: !important로 나타냄. 디버깅이 어려울 수 있기 때문에 사용시 주의
@@ -119,15 +163,18 @@
 
 * CSS 상속
 
-  * CSS는 상속을 통해 부모 요소의 속성을 자식에게 상속한다.(모두는 아님)
+  * CSS는 상속을 통해 부모 요소의 속성을 자식에게 상속한다.__(모두는 아님)__
+    * text관련 요소는 상속되지만 box model, position 관련요소는 상속되지 않는다.
 
   1. __코드에 정의된 순서__
 
-  * px, %(기준 사이즈에서 배율), em(상속받은 사이즈에서 배수), rem(root사이즈에서 배수)
+  * px, %(기준 사이즈에서 배율), em(상속받은 사이즈에서 배수), rem(root사이즈(최상위 요소html의 사이지를 기준으로)에서 배수)
   * vw(뷰포트 너비의 1%), vh(뷰포트 높이의 1%), vmin(뷰포트에서 가로세로 중에서 가장 짧은 쪽의 1%), vmax(뷰포트에서 가로세로 중에서 가장 긴 쪽에서 1%)
   * Hex(#), rgb, hsl, rgba, hsla
 
 * Box Model
+
+  ![box model](15_HTML_CSS.assets/box%20model-1598174834408.PNG)
 
   * margin: 테두리 바깥의 외부 여백. 배경색을 지정할 수 없다.
   * border: 테두리 영역
@@ -137,11 +184,12 @@
     * content-box: default값, 콘텐츠 영역의 크기, padding을 제외한 순수 contents 영역만을 box로 지정
     * border-box: 박스 모델 테두리 기준으로 크기 조절. (border까지의 너비)
 
-* 마진 상쇄
+![box sizing](15_HTML_CSS.assets/box%20sizing.PNG)
 
+* 마진 상쇄
+  * 블록요소에 탑이나 바텀 마진이 결합이 될 때 큰 마진으로 덮어씌어진다.
   * 수직 간의 형제 요소에서 주로 발생
   * margin 대신 padding을 이용해서 해결 가능
-
 * CSS Display
 
   * block:  줄바꿈이 일어나는 요소. 화면 크기 전체의 가로 폭을 차지한다. 블록 레벨 요소 안에 인라인 레벨 요소가 들어갈 수 있음.
@@ -150,11 +198,14 @@
     * span, a, img, input, label, b, em, i, strong
     * 컨텐트의 너비 만큼 공간을 차지
     * width, height, margin-top, margin-bottom 은 지정할 수 없음
+    * 상하여백은 line-height로 지정한다.
   * inline-block: inline처럼 한 줄에 표시 가능하며, block처럼 width, height, margin 속성을 모두 지정할 수 있다.
     * 컨텐트 너비 만큼 공간을 차지
     * width, height, margin-top, margin-bottom 을 지정 가능.
-  * none: 공간을 없애 버림.
+  * none: 공간을 없애 버림. 화면에 표시하지 않는다.
     * visibility: hidden 은 공간은 차지하나 화면에 표시만 안함.
+
+![속성에따른수평정렬](15_HTML_CSS.assets/%EC%86%8D%EC%84%B1%EC%97%90%EB%94%B0%EB%A5%B8%EC%88%98%ED%8F%89%EC%A0%95%EB%A0%AC.PNG)
 
 * CSS Position: 모든 요소는 네모(박스모델)이고, 어떻게 보여지는지(display)에 따라 문서에서의 배치가 달라질 수있다.
 
@@ -162,7 +213,8 @@
     * 기본적인 요소의 배치 순서에 따름(좌측 상단)
     * 부모 요소 내에서 배치될 때는 부모 요소의 위치를 기준으로 배치 된다.
   * 아래는 좌표 프로퍼티(top, bottom, left, right)를 사용하여 이동이 가능하다.(음수 값도 가능)
-    * relative: static 위치를 기준으로 이동(상대 위치)
+    * relative: static 위치를 기준(자기 자신의 과거 위치)으로 이동(상대 위치)
     * absolute: static이 아닌 가장 가까이 있는 부모/조상 요소를 기준으로 이동(절대 위치)
     * fixed: 부모 요소와 관계 없이 브라우저를 기준으로 이동(고정 위치)
       * 스크롤 시에도 항상 같은 곳에 위치
+
