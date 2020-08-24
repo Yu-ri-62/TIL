@@ -38,7 +38,7 @@
   * content: 여러 줄을 설정
   * items: 한 줄 설정
   * self: 개별 요소 설정
-* display: flex
+* display: flex(block)
   * __정렬하려는 부모 요소에 선언__
   * inline flex
 * flex direction: 쌓이는 방향을 설정
@@ -48,7 +48,7 @@
   * column reverse: 아래 -> 위
 * justify-content: 메인 방향축 요소들을 어떻게 배치할지 설정
   * flex-start(기본 값): 좌 상단 부터 시작하므로 좌측 상단 부터 차례로 배치됨.
-  * fle-end: 끝나는 점 부터 배치(아이템의 순서는 그대로 정렬만 우측)
+  * flex-end: 끝나는 점 부터 배치(아이템의 순서는 그대로 정렬만 우측)
   * center: 메인 축 정중앙
   * space-between: 좌우 정렬(양 끝 아이템은 양끝에 배치하고 균등하게 아이템을 유지)
   * space-around: 아이템 좌우에 동일한 공간을 부여
@@ -79,4 +79,5 @@
 * grid system
   * flexbox를 기준으로 12개의 column 시스템을 가짐.
   * 왜 12개인가: 12가 약수의 갯수가 많아서 사용하는 경우의 수를 많이 고려할 수 있음.
+  * 5개의 breakpoint를 가짐.
   * container > row > column
