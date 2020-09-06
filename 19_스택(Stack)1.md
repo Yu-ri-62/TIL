@@ -180,6 +180,8 @@ memo = [0, 1]
 
 #### DP(Dynamic Programming)
 
+__완전검색(재귀) + 가지치기로 대신해서 풀 수 있다(back tracking)__
+
 * 동적 계획 알고리즘은 그리디 알고리즘과 같이 최적화 문제를 해결하는 알고리즘이다.
 * 동적 계획 알고리즘은 먼저 입력 크기가 작은 부분 문제들을 모두 해결한 후에 그 해들을 이용하여 보다 큰 크기의 부분 문제들을 해결하여, 최종적으로 원래 주어진 입력의 문제를 해결하는 알고리즘이다.
 * 피보나치 수 DP 적용 알고리즘
@@ -203,6 +205,10 @@ def fibo2(n):
 
 #### DFS(깊이우선탐색)
 
+__선형구조(배열): 표현 - 리스트에 저장, 순회 - for문__
+
+__비선형구조(그래프, 트리): 표현 - 메모리에 저장(인접행렬, 인접 리스트, 간선의 배열), 순회 - dfs, bfs__
+
 * 비선형구조인 그래프 구조는 그래프로 표현된 모든 자료를 빠짐없이 검색하는 것이 중요함.
 * 두 가지 방법
   * 깊이 우선 탐색(Depth First Search, DFS)
@@ -210,7 +216,7 @@ def fibo2(n):
 * 시작 장점의 한 방향으로 갈 수 있는 경로가 있는 곳까지 깊이 탐색해 가다가 더 이상 갈 곳이 없게 되면, 가장 마지막에 만났던 갈림길 간선이 있는 정점으로 되돌아와서 다른 방향의 정점으로 탐색을 계속 반복하여 결국 모든 정점을 방문하여 순회방법
 * 가장 마지막에 만났던 갈림길의 정점으로 되돌아가서 다시 깊이 우선 탐색을 반복해야 하므로 후입선출 구조의 스택 사용
 
-#### DFS 알고리즘
+#### DFS 알고리즘(스택(반복) or 재귀 - 스택이 더 빠르지만 재귀가 간단함)
 
 * 시작 정점 v를 결정하여 방문한다.
 * 정점 v에 인접한 정점 중에서
@@ -219,22 +225,26 @@ def fibo2(n):
 * 스택이 공백이 될 때 까지 이전 과정을 반복한다.
 
 ```python
-visited[], stack[] 초기화
+# 재귀
+DFS_Recirsive(G,v)
+	visited[v]  <- True // v 방문 설정
+    for each all w in adjacency(G, v)   # v와 인접한 모든 행렬
+    	if visited[w] != True
+        	DFS_Recursive(G, v)
+```
+
+```python
+# 반복
+STACK s
+visited[]
 DFS(v)
-	v 방문;
-    visited[v] <- true;
-    do {
-        if (v의 인접 정점 중 방문 안한 w 찾기)
-        	push(v);
-        while(w) {
-            w 방문;
-            visited[w] <- true;
-            push(w);
-            v <- w;
-            v의 인접 정점 중 방문 안한 w 찾기
-        }
-        v <- pop(stack);
-    } while(v)
-end DFS()
+	push(s, v)
+    while not isEmpty(S)
+    	v <- pop(s)
+        if not visited[v]
+        	visited(v)
+        	for each w in adjacency(v)
+        		if not visited[w]	
+                	push(s, w)
 ```
 
