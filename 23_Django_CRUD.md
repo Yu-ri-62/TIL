@@ -1,7 +1,5 @@
 # Loading CRUD...
 
-
-
 * 가상 환경 설정
 
   * `python -m venv venv`
@@ -126,5 +124,6 @@
       ```
 
   * Delete
+    
     * DB 를 삭제하는 동작이기 때문에 POST 방식을 이용.
 
